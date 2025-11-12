@@ -1,3 +1,35 @@
 from django.db import models
 
 # Create your models here.
+class Usuario(models.Model):
+    id_usuario = models.IntegerField(primary_key=True)
+    nome = models.CharField(max_length=100)
+    matricula = models.CharField(max_length=4)
+    email = models.EmailField()
+
+class Livro(models.Model):
+    
+    class Disponibilidade(models.TextChoices):
+        DISPONIVEL = "Disponível",
+        EMPRESTADO = "Empretado",
+
+    id_livro = models.IntegerField(primary_key=True)
+    titulo = models.CharField(max_length=100)
+    autor = models.CharField(max_length=100)
+    ano = models.IntegerField()
+    isbn = models.CharField(max_length=100)
+    disponivel = models.CharField(max_length=10, choices=Disponibilidade, default=Disponibilidade.DISPONIVEL)
+    
+class Emprestimo(models.Model):
+    class Status(models.TextChoices):
+        FINALIZADO = "Finalizado"
+        ANDAMENTO = "Em andamento"
+        ATRASADO = "Atrasado"
+
+    id_emprestimo = models.IntegerField(primary_key=True)
+    data_emp = models.DateField()
+    dev_prev = models.DateField()
+    data_dev = models.DateField()
+    status = models.CharField(max_length=12, choices=Status, default="Em andamento")
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    id_livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
