@@ -7,6 +7,9 @@ class Usuario(models.Model):
     matricula = models.CharField(max_length=4)
     email = models.EmailField()
 
+    def __str__(self):
+        return self.id_usuario
+
 class Livro(models.Model):
     
     class Disponibilidade(models.TextChoices):
@@ -19,6 +22,9 @@ class Livro(models.Model):
     ano = models.IntegerField()
     isbn = models.CharField(max_length=100)
     disponivel = models.CharField(max_length=10, choices=Disponibilidade, default=Disponibilidade.DISPONIVEL)
+
+    def __str__(self):
+        return self.titulo
     
 class Emprestimo(models.Model):
     class Status(models.TextChoices):
@@ -33,3 +39,6 @@ class Emprestimo(models.Model):
     status = models.CharField(max_length=12, choices=Status, default="Em andamento")
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id_emprestimo
