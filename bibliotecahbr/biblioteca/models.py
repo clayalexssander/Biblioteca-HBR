@@ -14,7 +14,7 @@ class Livro(models.Model):
     
     class Disponibilidade(models.TextChoices):
         DISPONIVEL = "Disponível",
-        EMPRESTADO = "Empretado",
+        EMPRESTADO = "Emprestado",
 
     id_livro = models.IntegerField(primary_key=True)
     titulo = models.CharField(max_length=100)
