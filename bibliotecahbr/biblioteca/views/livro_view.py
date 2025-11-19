@@ -23,9 +23,6 @@ def listar_livros(request):
 
         queryset = Livro.objects.all()
 
-        if len(queryset) == 0:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
         serializer = LivroSerializer(queryset, many=True)
         return Response(serializer.data)
         
