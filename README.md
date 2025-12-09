@@ -20,7 +20,7 @@ http://127.0.0.1:8000/admin/
 
 http://127.0.0.1:8000/api/listar_livros
 ---
-#Road map do desenvolvimento
+# Road map do desenvolvimento
 
 ## Front-end
 - [ ] Menu
@@ -35,7 +35,7 @@ http://127.0.0.1:8000/api/listar_livros
 	- Pedir o id do usuário que vai ser deletado, fazer uma requisição DELETE
 - [ ] Listagem de todos os usuário
 	- Fazer uma requisição GET e mostrar todos os usuários
-	
+ ---
 - [ ] Cadastro de livro
 	- Pedir as infos do livro  e fazer uma requisição POST para criar um livro
 - [ ] Mostrar livro específico
@@ -46,7 +46,7 @@ http://127.0.0.1:8000/api/listar_livros
 	- Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
 - [ ] Listagem de todos os livros
 	- Fazer uma requisição GET e mostrar todos os livros
-
+---
 - [ ] Cadastro de emprestimo
 	- Pedir as infos (id do livro e id do usuário) e fazer uma requisição POST para criar um emprestimo
 - [ ] Mostrar emprestimo específico
@@ -59,7 +59,7 @@ http://127.0.0.1:8000/api/listar_livros
 	- Pedir o id do empréstimo, fazer uma requisição GET (para ver se esse empréstimo existe) e fazer uma requisição PATCH
 - [ ] Listagem de todos os empréstimos
 	- Fazer uma requisição GET e mostrar todos os empréstimos
-
+---
 
 ## Back-end
 - [ ] Cadastrar usuário - (POST) - dg
@@ -67,13 +67,13 @@ http://127.0.0.1:8000/api/listar_livros
 - [ ] Atualizar usuário - (PUT)
 - [ ] Deletar usuário - (DELETE)
 - [ ] Listar todos os usuários - (GET) - DG
-
+---
 - [ ] Cadastrar livro - (POST) - alex
 - [ ] Mostrar livro específico -
 - [ ] Atualizar livro - 
 - [ ] Deletar livro -
 - [x] Listar todos os livros - (GET) - kauã
-
+---
 - [ ] Cadastrar emprestimo - (POST) - alex
 - [ ] Mostrar empréstimo específico - (GET) - alex
 - [ ] Atualizar empréstimo específico
