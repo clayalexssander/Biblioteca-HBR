@@ -79,10 +79,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'biblioteca',
         'USER': 'root',
-        'PASSWORD': 'ifsp',
-        'HOST': 'localhost',      
-        'PORT': '3306',     
-    }
+        'PASSWORD': '12345678',
+        'HOST': '127.0.0.1', # Força a conexão via IP, ignorando o socket
+        'PORT': '3306',
+    }   
 }
 
 

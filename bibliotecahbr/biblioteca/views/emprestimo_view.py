@@ -9,28 +9,15 @@ from ..serializers.livro_serializer import LivroSerializer
 from django.utils import timezone 
 from pytz import timezone as tz
 from django.db import transaction
-"""
-Cadastrar usuario - (POST)
-cadastrar livro - (POST)
-Criar emprestimo - (POST)
-listar emprestimos - (GET)
-listar usuario - (GET)
-listar livro - (GET)
-atualizar emprestimo - (PUT)
-"""
 
-# Create your views here.
 @api_view(['GET'])
-def listar_livros(request):
+def listar_emprestimos(request):
 
     if request.method == 'GET':
 
-        queryset = Livro.objects.all()
+        queryset = Emprestimo.objects.all()
 
-        if len(queryset) == 0:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        serializer = LivroSerializer(queryset, many=True)
+        serializer = EmprestimoSerializer(queryset, many=True)
         return Response(serializer.data)
         
     return Response(status=status.HTTP_400_BAD_REQUEST)
