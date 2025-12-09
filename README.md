@@ -64,22 +64,22 @@ http://127.0.0.1:8000/api/listar_livros
 ## Back-end
 - [ ] Cadastrar usuário - (POST) - dg
 - [ ] Mostrar usuário específico - (GET)
-- [ ] Atualizar usuário - (PUT)
+- [ ] Atualizar usuário - (PATCH)
 - [ ] Deletar usuário - (DELETE)
-- [ ] Listar todos os usuários - (GET) - DG
+- [x] Listar todos os usuários - (GET) - DG
 ---
 - [ ] Cadastrar livro - (POST) - alex
-- [ ] Mostrar livro específico -
-- [ ] Atualizar livro - 
-- [ ] Deletar livro -
+- [ ] Mostrar livro específico - (GET)
+- [ ] Atualizar livro - (PATCH)
+- [ ] Deletar livro - (DELETE)
 - [x] Listar todos os livros - (GET) - kauã
 ---
 - [ ] Cadastrar emprestimo - (POST) - alex
 - [ ] Mostrar empréstimo específico - (GET) - alex
-- [ ] Atualizar empréstimo específico
-- [ ] Deletar empréstimo
-- [x] Realizar devolução do  empréstimo - (PUT) - kauã
-- [ ] Listar todos os empréstimos
+- [ ] Atualizar empréstimo específico- (PATCH)
+- [ ] Deletar empréstimo - (DELETE)
+- [x] Realizar devolução do  empréstimo - (PATCH) - kauã
+- [x] Listar todos os empréstimos - (GET) - kauã
 
 
 
