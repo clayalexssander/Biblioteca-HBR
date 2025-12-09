@@ -16,3 +16,20 @@ def listar_usuarios(request):
         return Response(serializer.data)
         
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def deletar_usuario(request, pk):
+    
+    if request.method == 'DELETE':
+        try:
+            usuario = Usuario.objects.get(pk=pk)
+        except Usuario.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        usuario.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+        
+        
+        
+
