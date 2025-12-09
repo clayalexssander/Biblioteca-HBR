@@ -13,9 +13,9 @@ OPERAÇÕES CRUD BÁSICAS:
 """
 urlpatterns = [
     path('livros/', livro_view.listar_livros), # Listar todos os livros
-    
-    
+
     path('usuarios/', usuario_view.listar_usuarios), # Listar todos os usuários
+    path('usuarios/<int:pk>/deletar', usuario_view.deletar_usuario), # Listar todos os usuários
     
     
     path('emprestimos/', emprestimo_view.listar_emprestimos), # Listar todos os emprestimos
