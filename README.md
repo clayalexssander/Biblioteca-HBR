@@ -26,39 +26,39 @@ http://127.0.0.1:8000/api/listar_livros
 - [ ] Menu
 
 - [ ] Cadastro de usuário
-	Pedir as infos para o usuário e fazer uma requisição POST para criar um usuário
+	- Pedir as infos para o usuário e fazer uma requisição POST para criar um usuário
 - [ ] Mostrar usuário específico
-	Pedir o id e mostrar todas as infos do usuário com aquele id, fazer uma requisição GET
+	- Pedir o id e mostrar todas as infos do usuário com aquele id, fazer uma requisição GET
 - [ ] Atualizar usuário
-	Pedir o id do usuário, fazer uma requisição GET (para ver se esse usuário existe) e pedir as informações novas do usuário
+	- Pedir o id do usuário, fazer uma requisição GET (para ver se esse usuário existe) e pedir as informações novas do usuário
 - [ ] Deletar usuário
-	Pedir o id do usuário que vai ser deletado, fazer uma requisição DELETE
+	- Pedir o id do usuário que vai ser deletado, fazer uma requisição DELETE
 - [ ] Listagem de todos os usuário
-	Fazer uma requisição GET e mostrar todos os usuários
+	- Fazer uma requisição GET e mostrar todos os usuários
 	
 - [ ] Cadastro de livro
-	Pedir as infos do livro  e fazer uma requisição POST para criar um livro
+	- Pedir as infos do livro  e fazer uma requisição POST para criar um livro
 - [ ] Mostrar livro específico
-	Pedir o id e mostrar todas as infos do livro com aquele id, fazer uma requisição GET
+	- Pedir o id e mostrar todas as infos do livro com aquele id, fazer uma requisição GET
 - [ ] Atualizar livro
-	Pedir o id do ivro, fazer uma requisição GET (para ver se esse livro existe) e pedir as informações novas do livro
+	- Pedir o id do ivro, fazer uma requisição GET (para ver se esse livro existe) e pedir as informações novas do livro
 - [ ] Deletar livro
-	Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
+	- Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
 - [ ] Listagem de todos os livros
-	Fazer uma requisição GET e mostrar todos os livros
+	- Fazer uma requisição GET e mostrar todos os livros
 
 - [ ] Cadastro de emprestimo
-	Pedir as infos (id do livro e id do usuário) e fazer uma requisição POST para criar um emprestimo
+	- Pedir as infos (id do livro e id do usuário) e fazer uma requisição POST para criar um emprestimo
 - [ ] Mostrar emprestimo específico
-	Pedir o id e mostrar todas as infos do emprestimo com aquele id, fazer uma requisição GET
+	- Pedir o id e mostrar todas as infos do emprestimo com aquele id, fazer uma requisição GET
 - [ ] Atualizar emprestimo
-	Pedir o id do empréstimo, fazer uma requisição GET (para ver se esse empréstimo existe) e pedir as informações novas do empréstimo
+	- Pedir o id do empréstimo, fazer uma requisição GET (para ver se esse empréstimo existe) e pedir as informações novas do empréstimo
 - [ ] Deletar livro
-	Pedir o id do livro, fazer um requisição GET (para ver se esse livro existe) e fazer um requisição DELETE
+	- Pedir o id do livro, fazer um requisição GET (para ver se esse livro existe) e fazer um requisição DELETE
 - [ ] Devolução de emprestimo
-	Pedir o id do empréstimo, fazer uma requisição GET (para ver se esse empréstimo existe) e fazer uma requisição PATCH
+	- Pedir o id do empréstimo, fazer uma requisição GET (para ver se esse empréstimo existe) e fazer uma requisição PATCH
 - [ ] Listagem de todos os empréstimos
-	Fazer uma requisição GET e mostrar todos os empréstimos
+	- Fazer uma requisição GET e mostrar todos os empréstimos
 
 
 ## Back-end
