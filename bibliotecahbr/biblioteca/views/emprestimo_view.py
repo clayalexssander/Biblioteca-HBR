@@ -58,4 +58,39 @@ def devolver_emprestimo(request, pk):
         return Response(status=status.HTTP_200_OK)
     
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def deletar_emprestimo(request, pk):
+    
+    if request.method == 'DELETE':
+         
+        try:
+            
+             emprestimo = Emprestimo.objects.get(pk=pk)    
+             
+        except Emprestimo.DoesNotExist:
+            
+            return Response(status=status.HTTP_404_NOT_FOUND)
         
+        if emprestimo.status == 'Finalizado':
+
+            emprestimo.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        
+        try:
+            
+            livro = Livro.objects.get(pk=emprestimo.id_livro_id)
+            
+        except Emprestimo.DoesNotExist:
+            
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        with transaction.atomic():
+            livro.disponivel = "Disponível"
+            livro.save()
+            emprestimo.delete()
+            
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
+    return Response(status=status.HTTP_400_BAD_REQUEST)
