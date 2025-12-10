@@ -19,5 +19,7 @@ urlpatterns = [
     
     
     path('emprestimos/', emprestimo_view.listar_emprestimos), # Listar todos os emprestimos
-    path('emprestimos/<int:pk>/devolver', emprestimo_view.devolver_emprestimo) # Devolver empréstimos
+    path('emprestimos/<int:pk>/deletar', emprestimo_view.deletar_emprestimo), # Deletar empréstimo
+    path('emprestimos/<int:pk>/devolver', emprestimo_view.devolver_emprestimo), # Devolver empréstimos
+    
 ]
