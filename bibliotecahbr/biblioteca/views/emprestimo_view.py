@@ -22,6 +22,28 @@ def listar_emprestimos(request):
         
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PATCH'])
+def atualizar_emprestimo(request, pk):
+    if request.method == 'PATCH':
+        
+        try:         
+            
+            emprestimo = Emprestimo.objects.get(pk=pk)
+            
+        except Emprestimo.DoesNotExist:
+            
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = EmprestimoSerializer(emprestimo, data=request.data)
+        
+        if serializer.validated_data.get('id_emprestimo') == pk and serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    return Response(status=status.HTTP_400_BAD_REQUEST)  
+        
 @api_view(['POST'])
 def devolver_emprestimo(request, pk):
     if request.method == 'POST':
