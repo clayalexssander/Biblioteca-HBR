@@ -5,7 +5,7 @@ class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
     matricula = models.CharField(max_length=4)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return f"({str(self.id_usuario)}) {self.nome}"

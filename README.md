@@ -65,20 +65,27 @@ http://127.0.0.1:8000/api/listar_livros
 - [ ] Cadastrar usuário - (POST) - dg
 - [ ] Mostrar usuário específico - (GET)
 - [ ] Atualizar usuário - (PATCH)
-- [ ] Deletar usuário - (DELETE)
+- [x] Deletar usuário - (DELETE)
+	- se deletar o user deve deletar o emprestimo e dar upodate status do livro
 - [x] Listar todos os usuários - (GET) - DG
 ---
 - [ ] Cadastrar livro - (POST) - alex
+	- Inserir todos os campos menos o status
 - [ ] Mostrar livro específico - (GET)
 - [ ] Atualizar livro - (PATCH)
+	- atualiza tudo menos status
 - [ ] Deletar livro - (DELETE)
+	- deleter emprestimos  ligados a esse livro
 - [x] Listar todos os livros - (GET) - kauã
 ---
 - [ ] Cadastrar emprestimo - (POST) - alex
+	- entrar com o ID do livro e Usuario
 - [ ] Mostrar empréstimo específico - (GET) - alex
 - [ ] Atualizar empréstimo específico- (PATCH)
-- [ ] Deletar empréstimo - (DELETE)
-- [x] Realizar devolução do  empréstimo - (PATCH) - kauã
+	-  o user atualiza apenas o campo de status de: em andamento para finalizado & atrasado para finalizado
+- [x] Deletar empréstimo - (DELETE)
+ -  se em andamento dar update no status do livro para disponivel
+- [x] Realizar devolução do empréstimo - (PATCH) - kauã
 - [x] Listar todos os empréstimos - (GET) - kauã
 
 
