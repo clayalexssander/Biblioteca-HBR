@@ -24,6 +24,11 @@ def listar_emprestimos(request):
 
 @api_view(['PATCH'])
 def atualizar_emprestimo(request, pk):
+    # NÃO FUNCIONA AINDA
+    # se o empréstimo estiver Finalizado:
+    # data de devolução prevista não pode ser menor que a data de empréstimo
+    # data de devolução real não pode ser menor que a data de empréstimo
+    # não deixar o usuário alterar manualmente se o status é Finalizado
     if request.method == 'PATCH':
         
         try:         
@@ -104,7 +109,7 @@ def deletar_emprestimo(request, pk):
             
             livro = Livro.objects.get(pk=emprestimo.id_livro_id)
             
-        except Emprestimo.DoesNotExist:
+        except Livro.DoesNotExist:
             
             return Response(status=status.HTTP_404_NOT_FOUND)
         
