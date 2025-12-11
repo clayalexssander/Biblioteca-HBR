@@ -10,6 +10,8 @@ abrir o workbench e criar um schema chamado biblioteca
 
 cd bibliotecahbr
 
+python manage.py makemigrations
+
 python manage.py migrate
 
 python manage.py createsuperuser
