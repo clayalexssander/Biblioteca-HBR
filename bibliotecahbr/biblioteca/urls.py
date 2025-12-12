@@ -11,8 +11,10 @@ OPERAÇÕES CRUD BÁSICAS:
 - PATCH /recurso/{id}  -> Atualizar parcialmente um recurso (ex: mudar título).
 
 """
+
 urlpatterns = [
     path('livros/', livro_view.listar_livros), # Listar todos os livros
+    path('livros/cadastrar', livro_view.cadastar_livro), # cadastrar livros
 
     path('usuarios/', usuario_view.listar_usuarios), # Listar todos os usuários
     path('usuarios/<int:pk>/deletar', usuario_view.deletar_usuario), # Listar todos os usuários

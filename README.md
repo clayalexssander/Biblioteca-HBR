@@ -19,6 +19,11 @@ python manage.py runserver
 http://127.0.0.1:8000/admin/
 
 http://127.0.0.1:8000/api/listar_livros
+
+http://127.0.0.1:8000/api/livros/cadastrar
+
+
+
 ---
 # Road map do desenvolvimento
 
@@ -68,8 +73,10 @@ http://127.0.0.1:8000/api/listar_livros
 - [x] Deletar usuário - (DELETE)
 	- se deletar o user deve deletar o emprestimo e dar upodate status do livro
 - [x] Listar todos os usuários - (GET) - DG
+
 ---
-- [ ] Cadastrar livro - (POST) - alex
+
+- [x] Cadastrar livro - (POST) - alex
 	- Inserir todos os campos menos o status
 - [ ] Mostrar livro específico - (GET)
 - [ ] Atualizar livro - (PATCH)
@@ -77,7 +84,9 @@ http://127.0.0.1:8000/api/listar_livros
 - [ ] Deletar livro - (DELETE)
 	- deleter emprestimos  ligados a esse livro
 - [x] Listar todos os livros - (GET) - kauã
+
 ---
+
 - [ ] Cadastrar emprestimo - (POST) - alex
 	- entrar com o ID do livro e Usuario
 - [ ] Mostrar empréstimo específico - (GET) - alex

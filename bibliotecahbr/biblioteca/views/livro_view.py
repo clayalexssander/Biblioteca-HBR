@@ -16,3 +16,15 @@ def listar_livros(request):
         return Response(serializer.data)
         
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def cadastar_livro(request):
+    if request.method == 'POST':
+        new_livro = request.data
+
+        serializer = LivroSerializer(data=new_livro)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
