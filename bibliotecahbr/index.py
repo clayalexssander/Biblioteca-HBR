@@ -72,3 +72,52 @@ print(response.json())
 print("Resposta:",response.status_code)
 
 
+# atualizar livro
+
+print("\n-------------------------------------")
+print(" Atualização dos dados dos Livros")
+print("---------------------------------------")
+
+id_livro = input("Digite o ID do livro: ")
+
+url_Atualizarlivro = f"http://127.0.0.1:8000/api/livros/{id_livro}/"
+
+response = requests.get(url_Atualizarlivro)
+
+if response.status_code != 200:
+    print("Livro não encontrado.")
+else:
+    livro = response.json()
+
+novo_titulo = input(f"Título ({livro['titulo']}): ") or livro['titulo']
+novo_autor = input(f"Autor ({livro['autor']}): ") or livro['autor']
+novo_ano = input(f"Ano ({livro['ano']}): ") or livro['ano']
+novo_isbn = input(f"ISBN ({livro['isbn']}): ") or livro['isbn']
+
+dados = {
+  "titulo": novo_titulo,
+  "autor": novo_autor,
+  "ano": int(novo_ano),
+  "isbn": novo_isbn
+ }
+
+response = requests.put(url_Atualizarlivro, json=dados)
+print("Status:", response.status_code)
+print("Resposta:", response.json())
+
+
+
+# deletar livro 
+
+print("\n----------------------")
+print(" Exclusão de livros ")
+print("----------------------")
+
+id_livro = input("Digite o ID do livro que deseja excluir: ")
+
+url_DeletarLivro = f"http://127.0.0.1:8000/api/livros/{id_livro}/"
+
+response = requests.delete(url_DeletarLivro)
+
+print("\nResultado")
+print("Status:", response.status_code)
