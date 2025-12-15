@@ -17,12 +17,6 @@
       <label>Autor: <input type="text" name="autor" value="{{ form_data.autor|default_if_none:'' }}"></label><br>
       <label>Ano: <input type="text" name="ano" value="{{ form_data.ano|default_if_none:'' }}"></label><br>
       <label>ISBN: <input type="text" name="isbn" value="{{ form_data.isbn|default_if_none:'' }}"></label><br>
-      <label>Disponível: 
-        <select name="disponivel">
-          <option value="Disponível" {% if form_data.disponivel == 'Disponível' %}selected{% endif %}>Disponível</option>
-          <option value="Emprestado" {% if form_data.disponivel == 'Emprestado' %}selected{% endif %}>Emprestado</option>
-        </select>
-      </label><br>
       <button type="submit">Salvar</button>
       <a href="{% url 'frontend:livro_list' %}">Voltar</a>
     </form>

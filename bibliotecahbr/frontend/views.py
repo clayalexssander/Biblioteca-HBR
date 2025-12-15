@@ -58,7 +58,7 @@ def livro_create(request):
         'autor': request.POST.get('autor', ''),
         'ano': int(request.POST.get('ano')) if request.POST.get('ano') else None,
         'isbn': request.POST.get('isbn', ''),
-        'disponivel': request.POST.get('disponivel', 'Disponível')
+        'disponivel': 'Disponível',
     }
     codigo_status, dados_resposta = _api_request(request, 'POST', '/livros/cadastrar', dados_json=dados_envio)
     if codigo_status in (200, 201):
@@ -181,13 +181,13 @@ def emprestimo_create(request):
     dados_envio = {
         'id_usuario': int(request.POST.get('id_usuario')) if request.POST.get('id_usuario') else None,
         'id_livro': int(request.POST.get('id_livro')) if request.POST.get('id_livro') else None,
-        'data_emp': request.POST.get('data_emp') or None,
-        'dev_prev': request.POST.get('dev_prev') or None,
+        'data_emp': None,
+        'dev_prev': None,
     }
     codigo_status, dados_resposta = _api_request(request, 'POST', '/emprestimos/realizar', dados_json=dados_envio)
     if codigo_status in (200, 201):
         return redirect(reverse('frontend:emprestimo_list'))
-    # repopular selects
+
     codigo_usuarios, usuarios_resposta = _api_request(request, 'GET', '/usuarios/')
     codigo_livros, livros_resposta = _api_request(request, 'GET', '/livros/')
     return render(request, 'frontend/emprestimo_form.html', {'form_data': dados_envio, 'errors': dados_resposta, 'usuarios': usuarios_resposta or [], 'livros': livros_resposta or []})

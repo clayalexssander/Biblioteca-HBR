@@ -7,6 +7,7 @@ from ..serializers.emprestimo_serializer import EmprestimoSerializer
 from ..serializers.livro_serializer import LivroSerializer
 
 from django.utils import timezone 
+from datetime import timedelta
 from django.db import transaction
 
 @api_view(['GET'])
@@ -21,7 +22,6 @@ def listar_emprestimos(request):
         
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
 @api_view(['POST'])
 def realizar_emprestimo(request):
     if request.method == 'POST':
@@ -29,8 +29,6 @@ def realizar_emprestimo(request):
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # checagens adicionais: datas e existência de fk
-        # obter instâncias a partir do validated_data (PrimaryKeyRelatedField -> instância)
         usuario = serializer.validated_data.get('id_usuario')
         livro = serializer.validated_data.get('id_livro')
 
@@ -50,7 +48,9 @@ def realizar_emprestimo(request):
             serializer.validated_data['data_emp'] = data_emp
 
         if dev_prev is None:
-            return Response({'dev_prev': ['Data de devolução prevista é obrigatória.']}, status=status.HTTP_400_BAD_REQUEST)
+            # data prevista de devolução = data_emp + 7 dias
+            dev_prev = data_emp + timedelta(days=7)
+            serializer.validated_data['dev_prev'] = dev_prev
 
         if data_emp > dev_prev:
             return Response({'non_field_errors': ['data_emp deve ser anterior ou igual a dev_prev.']}, status=status.HTTP_400_BAD_REQUEST)
@@ -99,10 +99,6 @@ def devolver_emprestimo(request, pk):
     
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
-
-
-
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def emprestimo_detalhe(request, pk):
     try:
@@ -130,13 +126,11 @@ def emprestimo_detalhe(request, pk):
             novo_status = serializer.validated_data.get('status', emprestimo.status)
             status_antigo = emprestimo.status
 
-            # checar consistência de datas se presentes (ou usando valores atuais)
             data_emp_efetiva = serializer.validated_data.get('data_emp', emprestimo.data_emp)
             dev_prev_efetiva = serializer.validated_data.get('dev_prev', emprestimo.dev_prev)
             if data_emp_efetiva and dev_prev_efetiva and data_emp_efetiva > dev_prev_efetiva:
                 return Response({'non_field_errors': ['data_emp deve ser anterior ou igual a dev_prev.']}, status=status.HTTP_400_BAD_REQUEST)
 
-            # se estiver finalizando agora, garantir data_dev e marcar livro como disponível
             if novo_status == Emprestimo.Status.FINALIZADO and status_antigo != Emprestimo.Status.FINALIZADO:
                 save_kwargs = {}
                 if 'data_dev' not in serializer.validated_data or serializer.validated_data.get('data_dev') is None:

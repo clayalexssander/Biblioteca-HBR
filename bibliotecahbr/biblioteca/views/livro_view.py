@@ -33,7 +33,14 @@ def listar_livros(request):
 @api_view(['POST'])
 def cadastrar_livro(request):
     if request.method == 'POST':
-        dados_livro = request.data
+
+        try:
+            dados_livro = dict(request.data)
+        except Exception:
+            dados_livro = request.data.copy() if hasattr(request.data, 'copy') else request.data
+
+        if not dados_livro.get('disponivel'):
+            dados_livro['disponivel'] = Livro.Disponibilidade.DISPONIVEL
 
         serializer = LivroSerializer(data=dados_livro)
 
@@ -60,10 +67,10 @@ def livro_detalhe(request, pk):
         parcial = request.method == 'PATCH'
         serializer = LivroSerializer(livro, data=request.data, partial=parcial)
         if serializer.is_valid():
-            # checar mudanças no campo 'disponivel' para evitar inconsistências
+
             novo_disponivel = serializer.validated_data.get('disponivel', None)
             if novo_disponivel is not None:
-                # existem empréstimos não finalizados para esse livro?
+
                 emprestimos_ativos = Emprestimo.objects.filter(id_livro=livro).exclude(status=Emprestimo.Status.FINALIZADO)
 
                 if novo_disponivel == Livro.Disponibilidade.DISPONIVEL and emprestimos_ativos.exists():

@@ -24,10 +24,6 @@
           {% endfor %}
         </select>
       </label><br>
-      <label>Data Emp: <input type="date" name="data_emp" value="{{ form_data.data_emp|default_if_none:'' }}"></label><br>
-      <label>Dev Prev: <input type="date" name="dev_prev" value="{{ form_data.dev_prev|default_if_none:'' }}"></label><br>
-      <label>Data Dev: <input type="date" name="data_dev" value="{{ form_data.data_dev|default_if_none:'' }}"></label><br>
-      <label>Status: <input type="text" name="status" value="{{ form_data.status|default_if_none:'' }}"></label><br>
       <button type="submit">Salvar</button>
       <a href="{% url 'frontend:emprestimo_list' %}">Voltar</a>
     </form>
