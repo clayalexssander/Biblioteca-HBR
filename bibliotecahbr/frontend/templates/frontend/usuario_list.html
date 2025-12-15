@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Usuários</title>
+  </head>
+  <body>
+    <h1>Usuários</h1>
+    <p><a href="{% url 'frontend:usuario_create' %}">Novo Usuário</a></p>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    <table border="1" cellpadding="6">
+      <thead><tr><th>ID</th><th>Nome</th><th>Matrícula</th><th>Email</th><th>Ações</th></tr></thead>
+      <tbody>
+      {% for u in usuarios %}
+        <tr>
+          <td>{{ u.id_usuario }}</td>
+          <td><a href="{% url 'frontend:usuario_detail' u.id_usuario %}">{{ u.nome }}</a></td>
+          <td>{{ u.matricula }}</td>
+          <td>{{ u.email }}</td>
+          <td>
+            <a href="{% url 'frontend:usuario_edit' u.id_usuario %}">Editar</a>
+            <form method="post" action="{% url 'frontend:usuario_delete' u.id_usuario %}" style="display:inline">{% csrf_token %}<button>Deletar</button></form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">Nenhum usuário.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p><a href="{% url 'frontend:menu' %}">Voltar ao menu</a></p>
+  </body>
+</html>

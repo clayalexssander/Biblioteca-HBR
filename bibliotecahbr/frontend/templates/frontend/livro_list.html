@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Livros</title>
+  </head>
+  <body>
+    <h1>Livros</h1>
+    <p><a href="{% url 'frontend:livro_create' %}">Novo Livro</a></p>
+
+    <form method="get">
+      <label>Título: <input type="text" name="titulo" value="{{ request.GET.titulo }}"></label>
+      <label>Ano: <input type="text" name="ano" value="{{ request.GET.ano }}"></label>
+      <button type="submit">Buscar</button>
+    </form>
+
+    {% if errors %}
+      <div style="color: red">{{ errors }}</div>
+    {% endif %}
+
+    <table border="1" cellpadding="6">
+      <thead><tr><th>ID</th><th>Título</th><th>Autor</th><th>Ano</th><th>Disponível</th><th>Ações</th></tr></thead>
+      <tbody>
+      {% for livro in livros %}
+        <tr>
+          <td>{{ livro.id_livro }}</td>
+          <td><a href="{% url 'frontend:livro_detail' livro.id_livro %}">{{ livro.titulo }}</a></td>
+          <td>{{ livro.autor }}</td>
+          <td>{{ livro.ano }}</td>
+          <td>{{ livro.disponivel }}</td>
+          <td>
+            <a href="{% url 'frontend:livro_edit' livro.id_livro %}">Editar</a>
+            <form method="post" action="{% url 'frontend:livro_delete' livro.id_livro %}" style="display:inline">
+              {% csrf_token %}
+              <button type="submit">Deletar</button>
+            </form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">Nenhum livro encontrado.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p><a href="{% url 'frontend:menu' %}">Voltar ao menu</a></p>
+  </body>
+</html>

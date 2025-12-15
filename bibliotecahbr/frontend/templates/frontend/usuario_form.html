@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Usuário</title>
+  </head>
+  <body>
+    <h1>{% if form_data.id_usuario %}Editar{% else %}Novo{% endif %} Usuário</h1>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    <form method="post">{% csrf_token %}
+      <label>Nome: <input type="text" name="nome" value="{{ form_data.nome|default_if_none:'' }}"></label><br>
+      <label>Matricula: <input type="text" name="matricula" value="{{ form_data.matricula|default_if_none:'' }}"></label><br>
+      <label>Email: <input type="email" name="email" value="{{ form_data.email|default_if_none:'' }}"></label><br>
+      <button type="submit">Salvar</button>
+      <a href="{% url 'frontend:usuario_list' %}">Voltar</a>
+    </form>
+  </body>
+</html>

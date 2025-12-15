@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Empréstimo</title>
+  </head>
+  <body>
+    <h1>{% if form_data.id_emprestimo %}Editar{% else %}Novo{% endif %} Empréstimo</h1>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    <form method="post">{% csrf_token %}
+      <label>Usuário:
+        <select name="id_usuario">
+          <option value="">-- selecione --</option>
+          {% for u in usuarios %}
+            <option value="{{ u.id_usuario }}" {% if form_data.id_usuario == u.id_usuario %}selected{% endif %}>{{ u.nome }} ({{ u.matricula }})</option>
+          {% endfor %}
+        </select>
+      </label><br>
+      <label>Livro:
+        <select name="id_livro">
+          <option value="">-- selecione --</option>
+          {% for l in livros %}
+            <option value="{{ l.id_livro }}" {% if form_data.id_livro == l.id_livro %}selected{% endif %}>{{ l.titulo }} ({{ l.ano }})</option>
+          {% endfor %}
+        </select>
+      </label><br>
+      <label>Data Emp: <input type="date" name="data_emp" value="{{ form_data.data_emp|default_if_none:'' }}"></label><br>
+      <label>Dev Prev: <input type="date" name="dev_prev" value="{{ form_data.dev_prev|default_if_none:'' }}"></label><br>
+      <label>Data Dev: <input type="date" name="data_dev" value="{{ form_data.data_dev|default_if_none:'' }}"></label><br>
+      <label>Status: <input type="text" name="status" value="{{ form_data.status|default_if_none:'' }}"></label><br>
+      <button type="submit">Salvar</button>
+      <a href="{% url 'frontend:emprestimo_list' %}">Voltar</a>
+    </form>
+  </body>
+</html>

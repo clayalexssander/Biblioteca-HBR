@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Empréstimos</title>
+  </head>
+  <body>
+    <h1>Empréstimos</h1>
+    <p><a href="{% url 'frontend:emprestimo_create' %}">Novo Empréstimo</a></p>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    <table border="1" cellpadding="6">
+      <thead><tr><th>ID</th><th>Usuário</th><th>Livro</th><th>Data Emp</th><th>Dev Prev</th><th>Data Dev</th><th>Status</th><th>Ações</th></tr></thead>
+      <tbody>
+      {% for e in emprestimos %}
+        <tr>
+          <td>{{ e.id_emprestimo }}</td>
+          <td>{{ e.id_usuario }}</td>
+          <td>{{ e.id_livro }}</td>
+          <td>{{ e.data_emp }}</td>
+          <td>{{ e.dev_prev }}</td>
+          <td>{{ e.data_dev }}</td>
+          <td>{{ e.status }}</td>
+          <td>
+            <a href="{% url 'frontend:emprestimo_detail' e.id_emprestimo %}">Detalhe</a>
+            <a href="{% url 'frontend:emprestimo_edit' e.id_emprestimo %}">Editar</a>
+            <form method="post" action="{% url 'frontend:emprestimo_delete' e.id_emprestimo %}" style="display:inline">{% csrf_token %}<button>Deletar</button></form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="8">Nenhum empréstimo.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p><a href="{% url 'frontend:menu' %}">Voltar ao menu</a></p>
+  </body>
+</html>

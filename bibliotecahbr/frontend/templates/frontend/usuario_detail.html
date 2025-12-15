@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Detalhe do Usuário</title>
+  </head>
+  <body>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    {% if usuario %}
+      <h1>{{ usuario.nome }}</h1>
+      <p><strong>Matrícula:</strong> {{ usuario.matricula }}</p>
+      <p><strong>Email:</strong> {{ usuario.email }}</p>
+      <p><a href="{% url 'frontend:usuario_edit' usuario.id_usuario %}">Editar</a> | <a href="{% url 'frontend:usuario_list' %}">Voltar</a></p>
+    {% else %}
+      <p>Usuário não encontrado.</p>
+    {% endif %}
+  </body>
+</html>

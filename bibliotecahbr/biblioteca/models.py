@@ -13,8 +13,8 @@ class Usuario(models.Model):
 class Livro(models.Model):
     
     class Disponibilidade(models.TextChoices):
-        DISPONIVEL = "Disponível",
-        EMPRESTADO = "Emprestado",
+        DISPONIVEL = "Disponível"
+        EMPRESTADO = "Emprestado"
 
     id_livro = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=100)
@@ -36,7 +36,7 @@ class Emprestimo(models.Model):
     data_emp = models.DateField()
     dev_prev = models.DateField()
     data_dev = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=12, choices=Status, default="Em andamento")
+    status = models.CharField(max_length=12, choices=Status, default=Status.ANDAMENTO)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
 

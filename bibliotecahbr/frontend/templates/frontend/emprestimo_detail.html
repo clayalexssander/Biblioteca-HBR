@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Detalhe do Empréstimo</title>
+  </head>
+  <body>
+    {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
+    {% if emprestimo %}
+      <h1>Empréstimo #{{ emprestimo.id_emprestimo }}</h1>
+      <p><strong>Usuário:</strong> {{ emprestimo.id_usuario }}</p>
+      <p><strong>Livro:</strong> {{ emprestimo.id_livro }}</p>
+      <p><strong>Data Emp:</strong> {{ emprestimo.data_emp }}</p>
+      <p><strong>Dev Prev:</strong> {{ emprestimo.dev_prev }}</p>
+      <p><strong>Data Dev:</strong> {{ emprestimo.data_dev }}</p>
+      <p><strong>Status:</strong> {{ emprestimo.status }}</p>
+      <p><a href="{% url 'frontend:emprestimo_edit' emprestimo.id_emprestimo %}">Editar</a> | <a href="{% url 'frontend:emprestimo_list' %}">Voltar</a></p>
+    {% else %}
+      <p>Empréstimo não encontrado.</p>
+    {% endif %}
+  </body>
+</html>

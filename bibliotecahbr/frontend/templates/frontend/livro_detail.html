@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Detalhe do Livro</title>
+  </head>
+  <body>
+    {% if errors %}
+      <div style="color: red">{{ errors }}</div>
+    {% endif %}
+    {% if livro %}
+      <h1>{{ livro.titulo }}</h1>
+      <p><strong>Autor:</strong> {{ livro.autor }}</p>
+      <p><strong>Ano:</strong> {{ livro.ano }}</p>
+      <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
+      <p><strong>Disponível:</strong> {{ livro.disponivel }}</p>
+      <p><a href="{% url 'frontend:livro_edit' livro.id_livro %}">Editar</a> | <a href="{% url 'frontend:livro_list' %}">Voltar</a></p>
+    {% else %}
+      <p>Livro não encontrado.</p>
+    {% endif %}
+  </body>
+</html>

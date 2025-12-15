@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+  </head>
+  <body>
+    <h1>Menu da Biblioteca</h1>
+    <ul>
+      <li><a href="{% url 'frontend:livro_list' %}">Livros</a></li>
+      <li><a href="{% url 'frontend:usuario_list' %}">Usuários</a></li>
+      <li><a href="{% url 'frontend:emprestimo_list' %}">Empréstimos</a></li>
+    </ul>
+  </body>
+</html>

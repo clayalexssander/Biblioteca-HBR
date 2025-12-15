@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Livro</title>
+  </head>
+  <body>
+    <h1>{% if form_data.id_livro %}Editar{% else %}Novo{% endif %} Livro</h1>
+
+    {% if errors %}
+      <div style="color: red">{{ errors }}</div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <label>Título: <input type="text" name="titulo" value="{{ form_data.titulo|default_if_none:'' }}"></label><br>
+      <label>Autor: <input type="text" name="autor" value="{{ form_data.autor|default_if_none:'' }}"></label><br>
+      <label>Ano: <input type="text" name="ano" value="{{ form_data.ano|default_if_none:'' }}"></label><br>
+      <label>ISBN: <input type="text" name="isbn" value="{{ form_data.isbn|default_if_none:'' }}"></label><br>
+      <label>Disponível: 
+        <select name="disponivel">
+          <option value="Disponível" {% if form_data.disponivel == 'Disponível' %}selected{% endif %}>Disponível</option>
+          <option value="Emprestado" {% if form_data.disponivel == 'Emprestado' %}selected{% endif %}>Emprestado</option>
+        </select>
+      </label><br>
+      <button type="submit">Salvar</button>
+      <a href="{% url 'frontend:livro_list' %}">Voltar</a>
+    </form>
+  </body>
+</html>
