@@ -47,9 +47,9 @@ http://127.0.0.1:8000/api/livros/cadastrar
 	- Pedir as infos do livro  e fazer uma requisição POST para criar um livro
 - [x] Mostrar livro específico
 	- Pedir o id e mostrar todas as infos do livro com aquele id, fazer uma requisição GET
-- [ ] Atualizar livro
+- [x] Atualizar livro
 	- Pedir o id do ivro, fazer uma requisição GET (para ver se esse livro existe) e pedir as informações novas do livro
-- [ ] Deletar livro
+- [x] Deletar livro
 	- Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
 - [x] Listagem de todos os livros
 	- Fazer uma requisição GET e mostrar todos os livros
