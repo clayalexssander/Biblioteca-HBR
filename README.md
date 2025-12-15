@@ -40,16 +40,16 @@ http://127.0.0.1:8000/api/livros/cadastrar
 	- Pedir o id do usuário, fazer uma requisição GET (para ver se esse usuário existe) e pedir as informações novas do usuário
 - [ ] Deletar usuário
 	- Pedir o id do usuário que vai ser deletado, fazer uma requisição DELETE
-- [ ] Listagem de todos os usuário
+- [x] Listagem de todos os usuário
 	- Fazer uma requisição GET e mostrar todos os usuários
  ---
 - [x] Cadastro de livro
 	- Pedir as infos do livro  e fazer uma requisição POST para criar um livro
-- [x] Mostrar livro específico
+- [ ] Mostrar livro específico
 	- Pedir o id e mostrar todas as infos do livro com aquele id, fazer uma requisição GET
-- [x] Atualizar livro
+- [ ] Atualizar livro
 	- Pedir o id do ivro, fazer uma requisição GET (para ver se esse livro existe) e pedir as informações novas do livro
-- [x] Deletar livro
+- [ ] Deletar livro
 	- Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
 - [x] Listagem de todos os livros
 	- Fazer uma requisição GET e mostrar todos os livros
