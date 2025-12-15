@@ -121,3 +121,83 @@ response = requests.delete(url_DeletarLivro)
 
 print("\nResultado")
 print("Status:", response.status_code)
+
+
+
+# Cadastrar Usuario 
+
+url_cadastroUsuario = "http://127.0.0.1:8000/api/usuarios/cadastrar/"
+
+print("\n----------------------")
+print(" Cadastro de Usuário ")
+print("----------------------")
+
+nome = input("Digite o nome do usuario: ")
+matricula = input("Digite o número de matricula: ")
+email = input("Digite o Email: ")
+
+dados = {
+  "nome": nome,
+  "matricula": matricula,
+  "email": email
+}
+
+response = requests.post(url_cadastroUsuario, json=dados)
+print("Usuário cadastrado com sucesso.")
+print(response.json())
+
+
+# Listar Usuario pelo ID
+
+print("\n--------------------------")
+print(" Listar Usuario por ID")
+print("--------------------------")
+
+id_usuario = input("Digite o ID do usuario: ")
+
+url_listarUsuario= f"http://127.0.0.1:8000/api/usuarios/{id_usuario}"
+
+response = requests.get(url_listarUsuario)
+
+usuario = response.json()
+print("ID:", usuario["id_usuario"])
+print("Nome:", usuario["nome"])
+print("Matricula:", usuario["matricula"])
+print("Email:", usuario["email"])
+
+
+# Atualizar Usuario
+print("\n-------------------------------------")
+print(" Atualização dos dados dos Usuários")
+print("-------------------------------------")
+
+id_usuario = input("Digite o ID do Usuário: ")
+
+url_AtualizarUsuario = f"http://127.0.0.1:8000/api/usuarios/{id_usuario}/atualizar"
+
+
+response = requests.get(url_AtualizarUsuario)
+
+if response.status_code != 200:
+    print("Usuário não encontrado.")
+    exit()
+
+usuario = response.json()
+
+
+novo_nome = input(f"Nome ({usuario['nome']}): ") or usuario["nome"]
+nova_matricula = input(f"Matrícula ({usuario['matricula']}): ") or usuario["matricula"]
+novo_email = input(f"Email ({usuario['email']}): ") or usuario["email"]
+
+dados = {
+  "nome": novo_nome,
+  "matricula": nova_matricula,
+  "email": novo_email
+}
+
+response = requests.put(url_AtualizarUsuario, json=dados)
+
+print("Status:", response.status_code)
+print("Resposta:", response.json())
+
+
