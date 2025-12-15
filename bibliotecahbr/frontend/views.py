@@ -1,6 +1,7 @@
 import json
 import requests
 from urllib.parse import urlencode
+from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -160,10 +161,31 @@ def usuario_delete(request, pk):
     _api_request(request, 'DELETE', f'/usuarios/{pk}/')
     return redirect(reverse('frontend:usuario_list'))
 
-
+def formatar_data(data): 
+    if not data:
+        return ''
+    try:
+        return datetime.strptime(data, '%Y-%m-%d').strftime('%d/%m/%Y')
+    except Exception:
+        return data
+    
 def emprestimo_list(request):
     codigo_status, dados_resposta = _api_request(request, 'GET', '/emprestimos/')
     emprestimos = dados_resposta if isinstance(dados_resposta, list) else []
+
+    for e in emprestimos:
+        e['data_emp'] = formatar_data(e.get('data_emp')) 
+        e['dev_prev'] = formatar_data(e.get('dev_prev')) 
+        e['data_dev'] = formatar_data(e.get('data_dev'))
+
+        codigo_u, usuario = _api_request(request, 'GET', f"/usuarios/{e['id_usuario']}")
+        if codigo_u == 200:
+            e['nome_usuario'] = usuario.get('nome')
+
+        codigo_l, livro = _api_request(request, 'GET', f"/livros/{e['id_livro']}")
+        if codigo_l == 200:
+            e['titulo_livro'] = livro.get('titulo')
+
     contexto = {'emprestimos': emprestimos, 'errors': None}
     if codigo_status != 200:
         contexto['errors'] = dados_resposta
