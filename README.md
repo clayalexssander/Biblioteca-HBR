@@ -32,11 +32,11 @@ http://127.0.0.1:8000/api/livros/cadastrar
 ## Front-end
 - [ ] Menu
 
-- [ ] Cadastro de usuário
+- [x] Cadastro de usuário
 	- Pedir as infos para o usuário e fazer uma requisição POST para criar um usuário
-- [ ] Mostrar usuário específico
+- [x] Mostrar usuário específico
 	- Pedir o id e mostrar todas as infos do usuário com aquele id, fazer uma requisição GET
-- [ ] Atualizar usuário
+- [x] Atualizar usuário
 	- Pedir o id do usuário, fazer uma requisição GET (para ver se esse usuário existe) e pedir as informações novas do usuário
 - [ ] Deletar usuário
 	- Pedir o id do usuário que vai ser deletado, fazer uma requisição DELETE
