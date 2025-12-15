@@ -32,8 +32,8 @@ http://127.0.0.1:8000/api/livros/cadastrar
 ## O que falta
 - [ ] Testar os endpoints, eu dei uma testada básica só
 - [ ] Atualizar usuário - (PATCH ou PUT depende do método que o usuário requisitar), pode fazer em funções diferentes se quiser, mas ai vai ter que alterar no front qual endpoint da api está sendo usado
-- [ ] Fazer a data ser apresentada como dia/mes/ano, estou pegando o dado bruto da api e mostrando, tem que resolver no view do frontend
-- [ ] Apresenta o no listar empréstimos do fronend o nome do usuário e o titulo do livro também, ele só mostra o id e não dá pra ter um noção de qual livro está se referindo
+- [x] Fazer a data ser apresentada como dia/mes/ano, estou pegando o dado bruto da api e mostrando, tem que resolver no view do frontend
+- [x] Apresenta o no listar empréstimos do fronend o nome do usuário e o titulo do livro também, ele só mostra o id e não dá pra ter um noção de qual livro está se referindo
 - [ ] Popular o banco de dados, acho que tem como fazer um 'command', mas eu não pesquisei sobre ainda, dá pra pedir uns livros pra IA
 
 ## Front-end
