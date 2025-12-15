@@ -43,15 +43,15 @@ http://127.0.0.1:8000/api/livros/cadastrar
 - [ ] Listagem de todos os usuário
 	- Fazer uma requisição GET e mostrar todos os usuários
  ---
-- [ ] Cadastro de livro
+- [x] Cadastro de livro
 	- Pedir as infos do livro  e fazer uma requisição POST para criar um livro
-- [ ] Mostrar livro específico
+- [x] Mostrar livro específico
 	- Pedir o id e mostrar todas as infos do livro com aquele id, fazer uma requisição GET
 - [ ] Atualizar livro
 	- Pedir o id do ivro, fazer uma requisição GET (para ver se esse livro existe) e pedir as informações novas do livro
 - [ ] Deletar livro
 	- Pedir o id do livro que vai ser deletado, fazer uma requisição DELETE
-- [ ] Listagem de todos os livros
+- [x] Listagem de todos os livros
 	- Fazer uma requisição GET e mostrar todos os livros
 ---
 - [ ] Cadastro de emprestimo
