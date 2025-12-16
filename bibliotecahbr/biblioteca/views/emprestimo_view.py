@@ -15,6 +15,16 @@ def listar_emprestimos(request):
 
     if request.method == 'GET':
 
+        hoje = timezone.localdate()
+        Emprestimo.objects.filter(
+            data_dev__isnull=True,
+            dev_prev__lt=hoje
+        ).exclude(
+            status='FINALIZADO'
+        ).update(
+            status='ATRASADO'
+        )
+
         consulta = Emprestimo.objects.select_related('id_livro', 'id_usuario').all()
 
         serializer = EmprestimoSerializer(consulta, many=True)
