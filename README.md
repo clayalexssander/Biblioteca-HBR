@@ -62,6 +62,10 @@ python manage.py createsuperuser
 Comando para rodar o servidor: python manage.py runserver
 ```
 
+## Acessando site
+Após executar  python manage.py runserver, click na Url e você será direcionado ao Menu!
+<img width="594" height="95" alt="image" src="https://github.com/user-attachments/assets/1d0749da-b7ff-4862-b64a-fd5f1d2af33f" />
+
 ---
 
 ## 🔐 Acessos
