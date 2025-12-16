@@ -24,53 +24,48 @@ def listar_emprestimos(request):
 
 @api_view(['POST'])
 def realizar_emprestimo(request):
-    if request.method == 'POST':
-        serializer = EmprestimoSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    data = request.data.copy()
 
-        usuario = serializer.validated_data.get('id_usuario')
-        livro = serializer.validated_data.get('id_livro')
+    if not data.get('data_emp'):
+        data['data_emp'] = timezone.localdate()
 
-        if usuario is None or livro is None:
-            errors = {}
-            if usuario is None:
-                errors['id_usuario'] = ['Campo id_usuario é obrigatório.']
-            if livro is None:
-                errors['id_livro'] = ['Campo id_livro é obrigatório.']
-            return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+    if not data.get('dev_prev'):
+        data['dev_prev'] = timezone.localdate() + timedelta(days=7)
 
-        data_emp = serializer.validated_data.get('data_emp')
-        dev_prev = serializer.validated_data.get('dev_prev')
-        # se data_emp não for informada, assumir hoje
-        if data_emp is None:
-            data_emp = timezone.localtime(timezone.now()).date()
-            serializer.validated_data['data_emp'] = data_emp
+    serializer = EmprestimoSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
 
-        if dev_prev is None:
-            # data prevista de devolução = data_emp + 7 dias
-            dev_prev = data_emp + timedelta(days=7)
-            serializer.validated_data['dev_prev'] = dev_prev
+    usuario = serializer.validated_data['id_usuario']
+    livro = serializer.validated_data['id_livro']
 
-        if data_emp > dev_prev:
-            return Response({'non_field_errors': ['data_emp deve ser anterior ou igual a dev_prev.']}, status=status.HTTP_400_BAD_REQUEST)
+    if data['data_emp'] > data['dev_prev']:
+        return Response(
+            {'detail': 'data_emp deve ser anterior ou igual a dev_prev.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-        try:
-            with transaction.atomic():
-                livro_bloqueado = Livro.objects.select_for_update().get(pk=livro.pk)
-                if livro_bloqueado.disponivel != Livro.Disponibilidade.DISPONIVEL:
-                    return Response({'id_livro': ['Livro não disponível.']}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        with transaction.atomic():
+            livro_bloqueado = Livro.objects.select_for_update().get(pk=livro.pk)
 
-                emprestimo = serializer.save()
-                livro_bloqueado.disponivel = Livro.Disponibilidade.EMPRESTADO
-                livro_bloqueado.save()
+            if livro_bloqueado.disponivel != Livro.Disponibilidade.DISPONIVEL:
+                return Response(
+                    {'id_livro': ['Livro não disponível.']},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-            return Response(EmprestimoSerializer(emprestimo).data, status=status.HTTP_201_CREATED)
-        except Livro.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            emprestimo = serializer.save()
+            livro_bloqueado.disponivel = Livro.Disponibilidade.EMPRESTADO
+            livro_bloqueado.save()
 
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            EmprestimoSerializer(emprestimo).data,
+            status=status.HTTP_201_CREATED
+        )
 
+    except Livro.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
 @api_view(['POST'])
 def devolver_emprestimo(request, pk):
     if request.method == 'POST':

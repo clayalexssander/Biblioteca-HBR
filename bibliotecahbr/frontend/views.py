@@ -247,6 +247,17 @@ def emprestimo_edit(request, pk):
     codigo_livros, livros_resposta = _api_request(request, 'GET', '/livros/')
     return render(request, 'frontend/emprestimo_form.html', {'form_data': dados_envio, 'errors': dados_resposta, 'usuarios': usuarios_resposta or [], 'livros': livros_resposta or []})
 
+@require_http_methods(['GET', 'POST'])
+def emprestimo_devolver(request, pk):
+    codigo_status, dados_resposta = _api_request(
+        request,
+        'POST',
+        f'/emprestimos/{pk}/devolver'
+    )
+    if codigo_status not in (200, 204):
+        pass
+
+    return redirect(reverse('frontend:emprestimo_list'))
 
 @require_http_methods(['POST'])
 def emprestimo_delete(request, pk):
