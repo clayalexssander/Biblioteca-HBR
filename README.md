@@ -59,7 +59,7 @@ Execute os comandos abaixo, **na ordem**:
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py runserver
+Comando para rodar o servidor: python manage.py runserver
 ```
 
 ---
@@ -105,17 +105,8 @@ python manage.py flush
 
 ## 🗂️ Modelo do Banco de Dados
 
-> 📌 **Espaço reservado para a imagem do modelo MER / DER**
+<img width="819" height="277" alt="image" src="https://github.com/user-attachments/assets/f4b805a7-b9fa-405e-a721-609349df2a6b" />
 
----
-
-# 🛣️ Roadmap do Desenvolvimento
-
-## 🔧 O que ainda falta
-
-* [ ] Testar todos os endpoints de forma completa
-* [ ] Atualizar usuário (PATCH ou PUT)
-* [ ] Popular melhor o banco com dados realistas
 
 ---
 
@@ -198,6 +189,3 @@ python manage.py flush
 ## ✅ Observações Finais
 
 Projeto funcional, organizado e pronto para evolução.
-O próximo passo é **refinar testes**, **melhorar dados de seed** e **padronizar respostas da API**.
-
-Backend feito na raça. Sem gambiarra. 😄
