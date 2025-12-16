@@ -14,7 +14,7 @@
       <p><strong>Dev Prev:</strong> {{ emprestimo.dev_prev }}</p>
       <p><strong>Data Dev:</strong> {{ emprestimo.data_dev }}</p>
       <p><strong>Status:</strong> {{ emprestimo.status }}</p>
-      <p><a href="{% url 'frontend:emprestimo_edit' emprestimo.id_emprestimo %}">Editar</a> | <a href="{% url 'frontend:emprestimo_list' %}">Voltar</a></p>
+      <p><a href="{% url 'frontend:emprestimo_list' %}">Voltar</a></p>
     {% else %}
       <p>Empréstimo não encontrado.</p>
     {% endif %}

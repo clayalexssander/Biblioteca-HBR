@@ -29,7 +29,15 @@ def usuario_detalhe(request, pk):
         return Response(serializer.data)
 
     if request.method in ('PUT', 'PATCH'):
-        pass
+        serializer = UsuarioSerializer(
+            usuario,
+            data=request.data,
+            partial=(request.method == 'PATCH')
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'DELETE':
         usuario.delete()

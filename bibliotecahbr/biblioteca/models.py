@@ -4,7 +4,7 @@ from django.db import models
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
-    matricula = models.CharField(max_length=4)
+    matricula = models.CharField(max_length=4,unique=True)
     email = models.EmailField(unique=True)
 
     def __str__(self):

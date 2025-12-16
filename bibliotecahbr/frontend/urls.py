@@ -24,7 +24,6 @@ urlpatterns = [
     path('emprestimos/', views.emprestimo_list, name='emprestimo_list'),
     path('emprestimos/novo/', views.emprestimo_create, name='emprestimo_create'),
     path('emprestimos/<int:pk>/', views.emprestimo_detail, name='emprestimo_detail'),
-    path('emprestimos/<int:pk>/editar/', views.emprestimo_edit, name='emprestimo_edit'),
     path('emprestimos/<int:pk>/deletar/', views.emprestimo_delete, name='emprestimo_delete'),
     path('emprestimos/<int:pk>/devolver/',views.emprestimo_devolver,name='emprestimo_devolver'),
 ]

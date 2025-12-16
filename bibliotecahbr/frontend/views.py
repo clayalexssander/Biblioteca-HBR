@@ -222,30 +222,6 @@ def emprestimo_detail(request, pk):
     return render(request, 'frontend/emprestimo_detail.html', {'emprestimo': dados_resposta, 'errors': None})
 
 
-@require_http_methods(['GET', 'POST'])
-def emprestimo_edit(request, pk):
-    if request.method == 'GET':
-        codigo_status, dados_resposta = _api_request(request, 'GET', f'/emprestimos/{pk}/')
-        if codigo_status != 200:
-            return render(request, 'frontend/emprestimo_form.html', {'form_data': {}, 'errors': dados_resposta, 'usuarios': [], 'livros': []})
-        codigo_usuarios, usuarios_resposta = _api_request(request, 'GET', '/usuarios/')
-        codigo_livros, livros_resposta = _api_request(request, 'GET', '/livros/')
-        return render(request, 'frontend/emprestimo_form.html', {'form_data': dados_resposta, 'errors': None, 'usuarios': usuarios_resposta or [], 'livros': livros_resposta or []})
-
-    dados_envio = {
-        'id_usuario': int(request.POST.get('id_usuario')) if request.POST.get('id_usuario') else None,
-        'id_livro': int(request.POST.get('id_livro')) if request.POST.get('id_livro') else None,
-        'data_emp': request.POST.get('data_emp') or None,
-        'dev_prev': request.POST.get('dev_prev') or None,
-        'data_dev': request.POST.get('data_dev') or None,
-        'status': request.POST.get('status') or None,
-    }
-    codigo_status, dados_resposta = _api_request(request, 'PUT', f'/emprestimos/{pk}/', dados_json=dados_envio)
-    if codigo_status in (200, 204):
-        return redirect(reverse('frontend:emprestimo_detail', args=[pk]))
-    codigo_usuarios, usuarios_resposta = _api_request(request, 'GET', '/usuarios/')
-    codigo_livros, livros_resposta = _api_request(request, 'GET', '/livros/')
-    return render(request, 'frontend/emprestimo_form.html', {'form_data': dados_envio, 'errors': dados_resposta, 'usuarios': usuarios_resposta or [], 'livros': livros_resposta or []})
 
 @require_http_methods(['GET', 'POST'])
 def emprestimo_devolver(request, pk):
