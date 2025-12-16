@@ -72,13 +72,6 @@ Após executar  python manage.py runserver, click na Url e você será direciona
 
 * **Admin Django:**
   [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-
-* **Listar livros:**
-  [http://127.0.0.1:8000/api/listar_livros](http://127.0.0.1:8000/api/listar_livros)
-
-* **Cadastrar livro:**
-  [http://127.0.0.1:8000/api/livros/cadastrar](http://127.0.0.1:8000/api/livros/cadastrar)
-
 ---
 
 ## 🧪 Popular e Resetar o Banco de Dados
