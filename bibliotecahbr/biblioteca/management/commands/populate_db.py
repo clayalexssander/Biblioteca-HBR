@@ -11,28 +11,42 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         today = timezone.localdate()
 
+        # --------------------
+        # USUÁRIOS
+        # --------------------
         users_data = [
             {'nome': 'Alice Silva', 'matricula': '0001', 'email': 'alice@example.com'},
             {'nome': 'Bruno Souza', 'matricula': '0002', 'email': 'bruno@example.com'},
             {'nome': 'Carla Lima', 'matricula': '0003', 'email': 'carla@example.com'},
+            {'nome': 'Diego Martins', 'matricula': '0004', 'email': 'diego@example.com'},
+            {'nome': 'Elisa Rocha', 'matricula': '0005', 'email': 'elisa@example.com'},
         ]
 
         created_users = []
         for u in users_data:
-            usuario, created = Usuario.objects.get_or_create(
-                email=u['email'], defaults={'nome': u['nome'], 'matricula': u['matricula']}
+            usuario, _ = Usuario.objects.get_or_create(
+                email=u['email'],
+                defaults={
+                    'nome': u['nome'],
+                    'matricula': u['matricula']
+                }
             )
             created_users.append(usuario)
 
+        # --------------------
+        # LIVROS
+        # --------------------
         books_data = [
             {'titulo': 'Clean Code', 'autor': 'Robert C. Martin', 'ano': 2008, 'isbn': '9780132350884'},
             {'titulo': 'The Pragmatic Programmer', 'autor': 'Andrew Hunt', 'ano': 1999, 'isbn': '9780201616224'},
             {'titulo': 'Design Patterns', 'autor': 'Erich Gamma', 'ano': 1994, 'isbn': '9780201633610'},
+            {'titulo': 'Refactoring', 'autor': 'Martin Fowler', 'ano': 1999, 'isbn': '9780201485677'},
+            {'titulo': 'Domain-Driven Design', 'autor': 'Eric Evans', 'ano': 2003, 'isbn': '9780321125217'},
         ]
 
         created_books = []
         for b in books_data:
-            livro, created = Livro.objects.get_or_create(
+            livro, _ = Livro.objects.get_or_create(
                 isbn=b['isbn'],
                 defaults={
                     'titulo': b['titulo'],
@@ -43,38 +57,89 @@ class Command(BaseCommand):
             )
             created_books.append(livro)
 
-        # Criar dois empréstimos de exemplo
-        # 1) empréstimo em andamento (livro emprestado)
-        emp1, created1 = Emprestimo.objects.get_or_create(
-            id_usuario=created_users[0],
-            id_livro=created_books[0],
-            defaults={
-                'data_emp': today - timedelta(days=10),
-                'dev_prev': today - timedelta(days=3),
+        # --------------------
+        # EMPRÉSTIMOS
+        # --------------------
+
+        emprestimos_data = [
+            # Empréstimo em andamento
+            {
+                'usuario': created_users[0],
+                'livro': created_books[0],
+                'data_emp': today - timedelta(days=7),
+                'dev_prev': today - timedelta(days=1),
                 'data_dev': None,
                 'status': Emprestimo.Status.ANDAMENTO,
+                'disponibilidade_livro': Livro.Disponibilidade.EMPRESTADO,
             },
-        )
-        if created1:
-            created_books[0].disponivel = Livro.Disponibilidade.EMPRESTADO
-            created_books[0].save()
 
-        # 2) empréstimo já finalizado (livro disponível)
-        emp2, created2 = Emprestimo.objects.get_or_create(
-            id_usuario=created_users[1],
-            id_livro=created_books[1],
-            defaults={
+            # Empréstimo finalizado no prazo
+            {
+                'usuario': created_users[1],
+                'livro': created_books[1],
                 'data_emp': today - timedelta(days=20),
                 'dev_prev': today - timedelta(days=13),
+                'data_dev': today - timedelta(days=10),
+                'status': Emprestimo.Status.FINALIZADO,
+                'disponibilidade_livro': Livro.Disponibilidade.DISPONIVEL,
+            },
+
+            # Empréstimo atrasado (ainda em andamento)
+            {
+                'usuario': created_users[2],
+                'livro': created_books[2],
+                'data_emp': today - timedelta(days=30),
+                'dev_prev': today - timedelta(days=15),
+                'data_dev': None,
+                'status': Emprestimo.Status.ANDAMENTO,
+                'disponibilidade_livro': Livro.Disponibilidade.EMPRESTADO,
+            },
+
+            # Empréstimo finalizado com atraso
+            {
+                'usuario': created_users[3],
+                'livro': created_books[3],
+                'data_emp': today - timedelta(days=25),
+                'dev_prev': today - timedelta(days=18),
                 'data_dev': today - timedelta(days=5),
                 'status': Emprestimo.Status.FINALIZADO,
+                'disponibilidade_livro': Livro.Disponibilidade.DISPONIVEL,
             },
-        )
-        if created2:
-            created_books[1].disponivel = Livro.Disponibilidade.DISPONIVEL
-            created_books[1].save()
 
-        self.stdout.write(self.style.SUCCESS('População completada:'))
-        self.stdout.write(f'  Usuários: {len(created_users)} (ex.: {created_users[0].email})')
-        self.stdout.write(f'  Livros: {len(created_books)} (ex.: {created_books[0].titulo})')
-        self.stdout.write(f'  Empréstimos: 2 (ex.: ids {emp1.id_emprestimo}, {emp2.id_emprestimo})')
+            # Empréstimo recente em andamento
+            {
+                'usuario': created_users[4],
+                'livro': created_books[4],
+                'data_emp': today - timedelta(days=2),
+                'dev_prev': today + timedelta(days=5),
+                'data_dev': None,
+                'status': Emprestimo.Status.ANDAMENTO,
+                'disponibilidade_livro': Livro.Disponibilidade.EMPRESTADO,
+            },
+        ]
+
+        emprestimos_criados = 0
+        for e in emprestimos_data:
+            emp, created = Emprestimo.objects.get_or_create(
+                id_usuario=e['usuario'],
+                id_livro=e['livro'],
+                defaults={
+                    'data_emp': e['data_emp'],
+                    'dev_prev': e['dev_prev'],
+                    'data_dev': e['data_dev'],
+                    'status': e['status'],
+                },
+            )
+
+            if created:
+                e['livro'].disponivel = e['disponibilidade_livro']
+                e['livro'].save()
+                emprestimos_criados += 1
+
+        # --------------------
+        # OUTPUT
+        # --------------------
+        self.stdout.write(self.style.SUCCESS('População completada com sucesso!'))
+        self.stdout.write(f'  Usuários: {len(created_users)}')
+        self.stdout.write(f'  Livros: {len(created_books)}')
+        self.stdout.write(f'  Empréstimos criados: {emprestimos_criados}')
