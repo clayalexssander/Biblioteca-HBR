@@ -3,6 +3,61 @@
   <head>
     <meta charset="utf-8">
     <title>Livro</title>
+    <style>
+      body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+     h1 {
+      background-color: rgb(185, 222, 255);
+      margin: 0px;
+      padding: 20px;
+    }
+     label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 50%;
+      padding: 10px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+
+  form {
+    margin-top: 20px;
+    padding: 20px;
+    }
+    button {
+      padding: 8px 14px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #0066cc;
+      border-radius: 5px;
+      color: white;
+    }
+
+    a {
+      margin-left: 10px;
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .erro {
+      color: red;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    </style>
   </head>
   <body>
     <h1>{% if form_data.id_livro %}Editar{% else %}Novo{% endif %} Livro</h1>
