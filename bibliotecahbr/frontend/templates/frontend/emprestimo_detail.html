@@ -3,6 +3,46 @@
   <head>
     <meta charset="utf-8">
     <title>Detalhe do Empréstimo</title>
+    <style>
+       body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      }
+
+      h1{
+        background-color: rgb(185, 222, 255);
+        margin: 0px;
+        padding: 20px;
+      }
+      body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+     h1 {
+      background-color: rgb(185, 222, 255);
+      margin: 0px;
+      padding: 20px;
+    }
+    
+    a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .erro {
+      color: red;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    </style>
   </head>
   <body>
     {% if errors %}<div style="color:red">{{ errors }}</div>{% endif %}
